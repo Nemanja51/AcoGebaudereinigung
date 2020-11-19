@@ -1,0 +1,200 @@
+﻿@model AcoGebaudereinigung.Models.ViewModels.HomePageViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*---------------------------- HERO IMAGE ---------------------------*@
+
+<div class="hero-image">
+    <div class="hero-text">
+        <h1>Wir putzen. Sie genießen!</h1>
+        <a class="btn btn-dark" href="#contact-us">Kontaktiere uns</a>
+    </div>
+</div>
+
+@*---------------------------- ABOUT US ---------------------------*@
+
+<div class="container text-center mb-5 uber-uns">
+    <div class="title" id="uber-uns">
+        <h2>Über uns</h2>
+    </div>
+    <div class="row">
+        <div class="text-center col-12 col-sm-6 uber-uns-text">
+            Aco Gebäudereinigung E.u. ist ein Unternehmen,
+            das 2017 mit dem Ziel gegründet wurde,
+            die 20-jährige Erfahrung seiner Mitarbeiter
+            auf dem Gebiet der Reinigung und Aufrechterhaltung
+            der Hygiene mit den neuesten Standards, Geräten und
+            Maschinen zu verbessern. Unser Motto lautet:
+            "Unsere Arbeit wird erst erledigt, wenn sie ordnungsgemäß erledigt ist."
+        </div>
+        <div class="text-center col-12 col-sm-6">
+            <img style="filter: drop-shadow(2px 4px 6px black);" class="img-fluid" src="~/images/aleksandar-pakaski-min.png" alt="Alternate Text" />
+        </div>
+    </div>
+</div>
+
+<hr class="w-25" />
+
+@*---------------------------- JOBS ---------------------------*@
+
+<div class="container text-center ">
+    <div class="title mb-3" id="jobs">
+        <h2>Unsere Leistungen</h2>
+    </div>
+    <div class="row job-wrap">
+        @foreach (var item in Model.Jobs)
+        {
+            <div class="col-md-5 border job-wraper mb-3 " data-aos="flip-up" data-aos-duration="1000">
+                @{
+                    var base64 = Convert.ToBase64String(item.Image);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                }
+
+                <div class="row">
+                    <div class="job-title col-md-5 mt-3">
+                        <h6 class="">@item.JobName</h6>
+                    </div>
+                    <div class="col-md-7 job-image mb-3">
+                        <img class="rounded-circle" src="@imgsrc" alt="@item.Alt" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<hr class="w-25" />
+
+@*---------------------------- GELLERY ---------------------------*@
+
+<div class="gallery container text-center">
+    <div class="title mb-3" id="gallery">
+        <h2>Galerie</h2>
+    </div>
+
+    <div class="row gallery-wrapper">
+        @foreach (var item in Model.Gallery)
+        {
+            <a data-toggle="lightbox" data-gallery="gallery" class="col-md-4 mb-3" @*class="col-xl-2 col-lg-3 col-md-4 col-sm-12 gallery-image mb-3 mr-3"*@ data-aos="fade-up" data-aos-duration="1000">
+                @{
+                    var base64 = Convert.ToBase64String(item.Image);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                }
+
+                <img class="img-fluid" style="border-radius: 20px;" @*style="width:300px;height:200px;*@ src="@imgsrc" alt="@item.Alt" />
+            </a>
+        }
+    </div>
+
+</div>
+
+<hr class="w-25" />
+
+@*---------------------------- CONTACT ---------------------------*@
+
+<div class="container contact-us">
+    <div class="title mb-3 text-center" id="contact-us">
+        <h2>Kontakt</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="contact-info col-md-5">
+            <span>
+                <img style="width:200px; margin-bottom:20px;" src="~/images/aco-logo.png" alt="Alternate Text" />
+            </span>
+            <div class="phone">
+                <div>
+                    <p class="font-weight-bold">Phone</p>
+                </div>
+                <div class="row justify-content-center">
+                    <i class="fas fa-phone mr-1"></i><br />
+                    <p>+43 699 12694688</p>
+                </div>
+            </div>
+            <div class="email">
+                <div>
+                    <p class="font-weight-bold">Email</p>
+                </div>
+                <div class="row justify-content-center">
+                    <i class="fas fa-envelope mr-1"></i>
+                    <p>aco.reinigung@gmail.com</p>
+                </div>
+            </div>
+            <div class="address">
+                <div>
+                    <p class="font-weight-bold">Address</p>
+                </div>
+                <div class="row justify-content-center">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <p>Steudelgasse 25/8, 1100 Wien</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form justify-content-center col-md-6 align-self-center mt-3">
+            <div class="text-center ask-text mb-3">
+                <p>Hier können Sie nach Preis und Verfügbarkeit fragen oder einen Termin für das Meeting vereinbaren.</p>
+            </div>
+            <form method="post" asp-controller="Home" asp-action="EmailSender">
+                <div class="contact-name mb-3">
+                    <div>
+                        <label><i class="fas fa-id-badge"></i> Name</label>
+                    </div>
+                    <div>
+                        <input type="text" name="contactName" required />
+                        
+                    </div>
+                </div>
+                <div class="contact-email mb-3">
+                    <div>
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                    </div>
+                    <div>
+                        <input type="email" name="contactEmail" required/>
+                    </div>
+                </div>
+                <div class="contactMessage mb-3">
+                    <div>
+                        <label><i class="fas fa-comments"></i> Message</label>
+                    </div>
+                    <div>
+                        <textarea class="contact-message-textarea" name="contactMessage" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <input class="submit-btn" type="submit" name="submit-button" value="Senden" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr class="w-25" />
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+@section Scripts{
+    
+    <script>
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+}

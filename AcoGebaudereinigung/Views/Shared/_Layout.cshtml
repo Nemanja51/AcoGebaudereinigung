@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AcoGebaudereinigung</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/images/aco-logo.png" rel="icon" />
+</head>
+<body>
+    <div class="loader">
+        <img src="~/images/loader-dribbble.gif" alt="Alternate Text" />
+    </div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow">
+            <div class="container">
+                <a class="navbar-brand" href="http://xn--acogebudereinigung-qtb.at/"><img style="width:150px;" src="~/images/aco-logo.png" alt="ACO Gebäudereinigung" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <partial name="_LoginPartial" />
+                    }
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Startseite</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#uber-uns">Über uns</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#jobs">Unsere Leistungen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#gallery">Galerie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#contact-us">Kontakt</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin panel
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Jobs" asp-action="Index">Usluge</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Galleries" asp-action="Index">Galerija</a>
+                                    </li>
+                                </div>
+                            </div>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - <a href="http://xn--acogebudereinigung-qtb.at/">ACO Gebäudereinigung e.U.</a> - <a href="http://nemanjapakaski.com/">N.P.</a> -
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/lib/fontawesome-free-5.13.0-web/js/all.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden";
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
