@@ -52,17 +52,7 @@ namespace AcoGebaudereinigung.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult EmailSender(string contactName, string contactEmail, string contactMessage)
         {
-            //if (contactName == String.Empty)
-            //{
-
-
-            //}
-
-
-
-
-
-            MailAddress to = new MailAddress("nemanja.pakaski@yahoo.com");
+            MailAddress to = new MailAddress("xxx@xxx.xx");
             MailAddress from = new MailAddress(contactEmail, contactName);
 
             MailMessage message = new MailMessage(from, to);
@@ -71,7 +61,7 @@ namespace AcoGebaudereinigung.Controllers
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("cane.coje.company@gmail.com", "ropspomapfuwztss"),
+                Credentials = new NetworkCredential("xxx@xxx.com", "xxxxxxxxxxxxxxx"),
                 EnableSsl = true
             };
 
